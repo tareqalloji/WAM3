@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../Layouts/Layout';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -14,15 +14,37 @@ import Info from '../../../assets/Images/Info.svg';
 import Call from '../../../assets/Images/Call.svg';
 import Call2 from '../../../assets/Images/Call2.svg';
 import Mail from '../../../assets/Images/Mail.svg';
-
+import { APIInstance } from '../../../Services/Api';
 
 export default function About() {
     const classes = AboutStyle();
     const Lang = localStorage.getItem('lng')
+    const values = {
+        about_us: '',
+        email: '',
+        phone_number: '',
+        bonus_value: '',
+        number_of_invites: '',
+        website_wallet: ''
+    };
+    const [formValues, setFormValues] = useState(values);
     const [t, i18n] = useTranslation();
     useEffect(() => {
         document.title = t('About');
-    });
+        return () => {
+            GetWebsiteInfo();
+
+        };
+    }, []);
+
+    function GetWebsiteInfo() {
+        APIInstance.GetWebsiteInfo()
+            .then((response: any) => {
+                setFormValues(response.data[0])
+
+            })
+    }
+
     return (
         <Layout>
             <Container maxWidth="lg" className={(Lang === "ar" ? classes.drtl : classes.dltr)}>
@@ -36,12 +58,7 @@ export default function About() {
                                 </span>
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                                In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate
-                                the visual form of a document or a typeface without relying on meaningful content.
-                                Lorem ipsum may be used as a placeholder before final copy is available.
-                                It is also used to temporarily replace text in a process called greeking,
-                                which allows designers to consider the form of a webpage or publication,
-                                without the meaning of the text influencing the design.
+                                {formValues.about_us}
                             </Typography>
                         </CardContent>
                         <Divider />
@@ -59,7 +76,7 @@ export default function About() {
                                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                                 <img src={Mail} alt={Mail} className={classes.ContactImage} />
                                                 <Typography className={classes.Typeo}>
-                                                    <strong>tarq.alloji@gmail.com</strong>
+                                                    <strong>{formValues.email}</strong>
                                                 </Typography>
                                             </div>
                                         </Grid>
@@ -67,7 +84,7 @@ export default function About() {
                                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                                 <img src={Call2} alt={Call2} className={classes.ContactImage} />
                                                 <Typography className={classes.Typeo}>
-                                                    <strong>0945201283</strong>
+                                                    <strong>{formValues.phone_number}</strong>
                                                 </Typography>
                                             </div>
                                         </Grid>

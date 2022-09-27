@@ -2,7 +2,7 @@
     "UserProfile": "الملف الشخصي",
     "InviteFriends": "دعوة الاصدقاء",
     "DepositMoney": "إيداع الأموال",
-    "WithdrowMoney": "سحب الأموال",
+    "WithdrawMoney": "سحب الأموال",
     "Investments": "الاستثمارات",
     "Settings": "الإعدادات",
     "Login": "تسجيل الدخول",
@@ -45,11 +45,11 @@
     "RecoverPassword": "إستعادة كلمة المرور",
     "InvestmentsList": "قائمة الاستثمارات",
     "UsersList": "قائمة المستخدمين",
-    "WithdrowsList": "قائمة المسحوبات",
+    "WithdrawsList": "قائمة المسحوبات",
     "DepositsList": "قائمة الإيداعات",
     "Options": "اجراءات",
     "Deposits": "الإيداعات",
-    "Withdrows": "المسحوبات",
+    "Withdraws": "المسحوبات",
     "UserDetails": "تفاصيل المستخدم",
     "ProcessImage": "صورة العملية",
     "Accept": "قبول",
@@ -61,5 +61,8 @@
     "BonusValue": "قيمة الحسم",
     "UsersNumberForBonus": "عدد المتسخدمين المستفيدين من الحسم",
     "LoginAsAdministrator": "تسجيل الدخول كمسؤول",
-    "BackToUsersList" : "العودة الى قائمةالمستخدمين"
+    "BackToUsersList" : "العودة الى قائمة المستخدمين",
+    "NoWithdrawsFound": "لايوجد عمليات سحب",
+    "NoneFound" : "لايوجد",
+    "NoWithdrawProcessToPreview" : "لا يوجد عمليات إيداع لعرضها"
 }

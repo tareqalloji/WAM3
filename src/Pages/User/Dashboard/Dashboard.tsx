@@ -9,8 +9,8 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import { APIInstance } from '../../../Services/Api';
-import axios from 'axios';
-import { Button } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 
 export default function Dashboard() {
@@ -21,32 +21,37 @@ export default function Dashboard() {
     const classes = DashboardStyle();
     const [t, i18n] = useTranslation();
     const Lang = localStorage.getItem('lng');
+    let values: any = {
+        data1: '',
+        data2: ''
+    }
+    const [formValues, setFormValues] = useState(values);
     useEffect(() => {
         document.title = t('Dashboard');
-    });
+        return () => {            
+            GetDashboard();
+        };
+    }, []);
 
-    const data = {
-        Total_amount_of_Deposit: '',
-        TotalInvite: ''
-    }
+
     const GetDashboard = () => {
         APIInstance.Dashboard()
-            .then((res) => {
-                data.Total_amount_of_Deposit = res.data.Total_amount_of_Deposit;
-                data.TotalInvite = res.data.TotalInvite;
-                console.log(data.Total_amount_of_Deposit);
-            })
+            .then((response) => {
+                values = {
+                    data1: response.data.Total_amount_of_Deposit,
+                    data2: response.data.Total_number_of_invites,
+                }
+            }).then(() => {
+                setFormValues(values)
+            });
     }
-
 
 
     return (
         <Layout>
             <Container component="main">
+
                 <Box>
-                    <Button
-                    onClick={GetDashboard}
-                    >get</Button>
                     <Grid container spacing={2} sx={{ marginTop: 5 }}>
                         <Grid item xs={12} sm={6} className={classes.YourAmount}>
                             <Card className={classes.CardColor}>
@@ -59,7 +64,7 @@ export default function Dashboard() {
                                 <Grid sx={{ margin: 15 }}>
                                     <CssBaseline />
                                     <Typography component="h1" variant="h2" className={classes.CardNumber}>
-                                        20
+                                        {formValues.data1}
                                     </Typography>
                                 </Grid>
                             </Card>
@@ -75,7 +80,7 @@ export default function Dashboard() {
                                 <Grid sx={{ margin: 15 }}>
                                     <CssBaseline />
                                     <Typography component="h1" variant="h2" className={classes.CardNumber}>
-                                        20
+                                        {formValues.data2}
                                     </Typography>
                                 </Grid>
                             </Card>

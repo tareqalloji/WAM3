@@ -44,13 +44,14 @@ export default class Api {
             }, {
             headers: {
                 'Accept': `application/json`,
+                'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
             },
         });
     }
 
-    Withdrow(amount: number, wallet_link: string, image: any) {
-        return axios.post(`https://aurora-team.com/wam3/public/api/withdrow`,
+    Withdraw(amount: string, wallet_link: string, image: any) {
+        return axios.post(`https://aurora-team.com/wam3/public/api/withdraw`,
             {
                 amount: amount,
                 wallet_link: wallet_link,
@@ -59,12 +60,13 @@ export default class Api {
             }, {
             headers: {
                 'Accept': `application/json`,
+                'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
             },
         });
     }
 
-    Investment(amount: number) {
+    Investment(amount: string) {
         return axios.post(`https://aurora-team.com/wam3/public/api/invest`,
             {
                 amount: amount
@@ -77,14 +79,14 @@ export default class Api {
         });
     }
 
-    UpdateProfile(first_name: string, last_name: string, phone: number, email: string, country: string) {
-        return axios.post(`https://aurora-team.com/wam3/public/api/usera-updateProfile`,
+    UpdateProfile(first_name: string, last_name: string, phone: string, country: string, invite_link: string) {
+        return axios.post(`https://aurora-team.com/wam3/public/api/user-updateProfile`,
             {
                 first_name: first_name,
                 last_name: last_name,
                 phone: phone,
-                email: email,
                 country: country,
+                invite_link: invite_link,
 
             }, {
             headers: {
@@ -94,17 +96,28 @@ export default class Api {
         });
     }
 
-    // GetWebsiteInfo(about_us: string, phone: number, email: string) {
-    //     return axios.get(`https://aurora-team.com/wam3/public/api/get-info`,
-    //         {
-    //             about_us: about_us,
-    //             phone: phone,
-    //             email: email,
+    getUserProfile() {
+        return axios.get(`https://aurora-team.com/wam3/public/api/user-profile`,
+            {
+                headers: {
+                    'Accept': `application/json`,
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+    }
 
-    //         });
-    // }
+    GetWebsiteInfo() {
+        return axios.get(`https://aurora-team.com/wam3/public/api/get-info`,
+            {
+                headers: {
+                    'Accept': `application/json`,
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+            }
+        );
+    }
 
-    Dashboard() {
+    async Dashboard() {
         return axios.get(`https://aurora-team.com/wam3/public/api/user-dashboard`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -116,11 +129,11 @@ export default class Api {
 
     // Admin
 
-    AdminLogin(userEmail: string, userPassword: string) {
+    AdminLogin(email: string, password: string) {
         return axios.post(`https://aurora-team.com/wam3/public/api/adminlogin`,
             {
-                email: userEmail,
-                password: userPassword,
+                email: email,
+                password: password,
 
             }, {
             headers: {
@@ -144,5 +157,67 @@ export default class Api {
         });
     }
 
-}
+    GetUsersList() {
+        return axios.get(`https://aurora-team.com/wam3/public/api/get-all-users`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+
+    }
+
+    GetUserdetails(id: any) {
+        return axios.get(`https://aurora-team.com/wam3/public/api/get-all-users/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+
+    }
+
+    GetDepositsList() {
+        return axios.get(`https://aurora-team.com/wam3/public/api/get-user-deposit`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+    }
+
+
+    GetWithdrawsList() {
+        return axios.get(`https://aurora-team.com/wam3/public/api/get-user-withdraw`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+    }
+
+    DepositStatus(status: string, id: String) {
+        return axios.post(`https://aurora-team.com/wam3/public/api/admin-accept-reject/${id}`,
+            {
+                status: status,
+
+            }, {
+            headers: {
+                'Accept': `application/json`,
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            },
+        })
+    }
+
+    WithdrawStatus(status: string, id: String) {
+        return axios.post(`https://aurora-team.com/wam3/public/api/admin-accept-reject-withdraw/${id}`,
+            {
+                status: status,
+
+            }, {
+            headers: {
+                'Accept': `application/json`,
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            },
+        })
+    }
+};
+
+
 export let APIInstance = new Api();

@@ -2,7 +2,7 @@
     "UserProfile": "User Profile",
     "InviteFriends": "Invite Friends",
     "DepositMoney": "Deposit Money",
-    "WithdrowMoney": "Withdraw  Money",
+    "WithdrawMoney": "Withdraw  Money",
     "Investments": "Investments",
     "Settings": "Settings",
     "Login": "Login",
@@ -45,11 +45,11 @@
     "RecoverPassword": "Recover Password",
     "InvestmentsList": "Investments List",
     "UsersList": "Users List",
-    "WithdrowsList": "Withdrows List",
+    "WithdrawsList": "Withdraws List",
     "DepositsList": "Deposits List",
     "Options": "Options",
     "Deposits": "Deposits",
-    "Withdrows": "Withdrows",
+    "Withdraws": "Withdraws",
     "UserDetails": "User Details",
     "ProcessImage": "Process Image",
     "Accept": "Accept",
@@ -61,5 +61,8 @@
     "BonusValue": "Bonus Value",
     "UsersNumberForBonus": "Users Number For Bonus",
     "LoginAsAdministrator": "Login As Administrator",
-    "BackToUsersList" : "Back To Users List"
+    "BackToUsersList": "Back To Users List",
+    "NoWithdrawsFound": "No Withdraws Found",
+    "NoneFound": "None Found",
+    "NoWithdrawProcessToPreview": "No Withdraw Process To Preview"
 }

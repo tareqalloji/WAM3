@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../Layouts/Layout';
 import { useTranslation } from 'react-i18next';
 import { UserDetailsStyle } from './UserDetailsStyle';
@@ -9,17 +9,54 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Card from '@mui/material/Card';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
 
 export default function UserDetails() {
     const classes = UserDetailsStyle();
     const [t, i18n] = useTranslation();
     const Lang = localStorage.getItem('lng');
+    const { id } = useParams();
     const Color = {
         purple: '#7750DD',
     }
+    const values = {
+        user_details: [{
+            first_name: '',
+            last_name: '',
+            phone: '',
+            email: '',
+            country: '',
+            invite_link: '',
+        }],
+        user_invites: 0,
+        deposit_amount: 0,
+
+
+    };
+    const [formValues, setFormValues] = useState(values);
+
     useEffect(() => {
         document.title = t('UserDetails');
-    });
+        return () => {
+            GetUserdetails(id);
+        };
+
+
+    }, []);
+
+    function GetUserdetails(id: any) {
+        return axios.get(`https://aurora-team.com/wam3/public/api/get-user-details/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            },
+        }).then((response) => {
+            setFormValues(response.data);
+        });
+
+    }
+
     return (
         <Layout>
             <Container component="main">
@@ -31,22 +68,21 @@ export default function UserDetails() {
                     }}
                 >
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={4} >
+                        {/* <Grid item xs={12} sm={4} >
                             <Card>
                                 <Grid sx={{ margin: 4 }}>
                                     <CssBaseline />
-                                    <Typography component="h1" variant="h5" style={{color: Color.purple}} className={(Lang === "ar" ? classes.drtl : classes.dltr)}>
+                                    <Typography component="h1" variant="h5" style={{ color: Color.purple }} className={(Lang === "ar" ? classes.drtl : classes.dltr)}>
                                         {t('InvitedUsers')}
                                     </Typography>
                                     <form>
                                         <Grid container spacing={2} sx={{ marginTop: 5 }} className={(Lang === "ar" ? classes.TypeRtl : classes.TypeLtr)}>
                                             <Grid item xs={12} sm={12}>
-                                                <Typography component="h5" variant="h5" style={{textAlign:'center'}}>
-                                                    Mo Salah
+                                                <Typography component="h5" variant="h5" style={{ textAlign: 'center' }}>
                                                 </Typography>
                                             </Grid>
                                             <Grid item xs={12} sm={12}>
-                                                <Typography component="h5" variant="h5" style={{textAlign:'center'}}>
+                                                <Typography component="h5" variant="h5" style={{ textAlign: 'center' }}>
                                                     Mo Salah
                                                 </Typography>
                                             </Grid>
@@ -54,8 +90,8 @@ export default function UserDetails() {
                                     </form>
                                 </Grid>
                             </Card>
-                        </Grid>
-                        <Grid item xs={12} sm={8}>
+                        </Grid> */}
+                        <Grid item xs={12} sm={10} style={{ margin: 'auto' }}>
                             <Card>
                                 <Grid sx={{ margin: 4 }}>
                                     <CssBaseline />
@@ -71,7 +107,7 @@ export default function UserDetails() {
                                             </Grid>
                                             <Grid item xs={6} sm={6}>
                                                 <Typography variant="subtitle1">
-                                                    طارق
+                                                    {formValues.user_details[0].first_name}
                                                 </Typography>
                                             </Grid>
                                             <Grid item xs={6} sm={6}>
@@ -81,7 +117,7 @@ export default function UserDetails() {
                                             </Grid>
                                             <Grid item xs={6} sm={6}>
                                                 <Typography variant="subtitle1">
-                                                    اللوجي
+                                                    {formValues.user_details[0].last_name}
                                                 </Typography>
                                             </Grid>
                                             <Grid item xs={6} sm={6}>
@@ -91,7 +127,7 @@ export default function UserDetails() {
                                             </Grid>
                                             <Grid item xs={6} sm={6}>
                                                 <Typography variant="subtitle1">
-                                                    0945201283
+                                                    {formValues.user_details[0].phone}
                                                 </Typography>
                                             </Grid>
                                             <Grid item xs={6} sm={6}>
@@ -101,8 +137,7 @@ export default function UserDetails() {
                                             </Grid>
                                             <Grid item xs={6} sm={6}>
                                                 <Typography variant="subtitle1">
-                                                    سوريا
-                                                </Typography>
+                                                    {formValues.user_details[0].country}                                                </Typography>
                                             </Grid>
                                             <Grid item xs={6} sm={6}>
                                                 <Typography component="h5" variant="h5">
@@ -111,7 +146,7 @@ export default function UserDetails() {
                                             </Grid>
                                             <Grid item xs={6} sm={6}>
                                                 <Typography variant="subtitle1">
-                                                    tarq.alloji@gmail.com
+                                                    {formValues.user_details[0].email}
                                                 </Typography>
                                             </Grid>
                                             <Grid item xs={6} sm={6}>
@@ -121,7 +156,11 @@ export default function UserDetails() {
                                             </Grid>
                                             <Grid item xs={6} sm={6}>
                                                 <Typography variant="subtitle1">
-                                                    http://localhost:3000/Admin/UserDetails
+                                                    {formValues.user_details[0].invite_link == null ?
+                                                    t('NoneFound')
+                                                    :
+                                                    formValues.user_details[0].invite_link
+                                                    }
                                                 </Typography>
                                             </Grid>
                                             <Grid item xs={6} sm={6}>
@@ -131,7 +170,7 @@ export default function UserDetails() {
                                             </Grid>
                                             <Grid item xs={6} sm={6}>
                                                 <Typography variant="subtitle1">
-                                                    4500$
+                                                    {formValues.deposit_amount}
                                                 </Typography>
                                             </Grid>
                                             <Grid item xs={6} sm={6}>
@@ -141,7 +180,7 @@ export default function UserDetails() {
                                             </Grid>
                                             <Grid item xs={6} sm={6}>
                                                 <Typography variant="subtitle1">
-                                                    22
+                                                    {formValues.user_invites}
                                                 </Typography>
                                             </Grid>
                                         </Grid>

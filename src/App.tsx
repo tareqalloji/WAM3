@@ -3,11 +3,13 @@ import './App.css';
 import Layout from './Pages/User/Layouts/Layout';
 import Login from './Pages/User/Authentication/Login/Login';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routing } from "./Services/routing";
 
 
-function App() {  
+function App() {
   return (
-    <div className="App">      
+    <div className="App">
+      
     </div>
   );
 }

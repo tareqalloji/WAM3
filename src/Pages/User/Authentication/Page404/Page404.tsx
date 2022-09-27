@@ -73,13 +73,13 @@ export default function Page404() {
                                 minHeight: '100vh',
                             }}
                         >
-                            <Link to="/AllUsers" style={{ textDecoration: 'none' }}>
+                            <Link to="/login" style={{ textDecoration: 'none' }}>
                                 <Button variant="contained" sx={{
                                     marginTop: '10px', backgroundColor: Color.purple,
                                     ':hover': { bgcolor: Color.purple },
                                 }} size="large">
                                     <KeyboardBackspaceOutlinedIcon></KeyboardBackspaceOutlinedIcon>
-                                    {t("BacktoAllUsers")}
+                                    {t("BackToUsersList")}
                                 </Button>
                             </Link>
                             <img
