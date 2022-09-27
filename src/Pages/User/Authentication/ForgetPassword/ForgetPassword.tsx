@@ -11,10 +11,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Card from '@mui/material/Card';
 import { Link, Navigate } from 'react-router-dom';
 
-const Color = {
-    purple: '#7750DD',
-}
-
 
 export default function ForgetPassword() {
     const classes = ForgetPasswordStyle();
@@ -67,7 +63,7 @@ export default function ForgetPassword() {
                                         alignItems="center">
                                         <Grid item xs={12} sm={4} >
                                             <Button
-                                                style={{ backgroundColor: Color.purple }}
+                                                className={classes.btn}
                                                 fullWidth
                                                 type="submit"
                                                 variant="contained"

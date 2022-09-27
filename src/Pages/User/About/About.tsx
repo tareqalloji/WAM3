@@ -31,10 +31,7 @@ export default function About() {
     const [t, i18n] = useTranslation();
     useEffect(() => {
         document.title = t('About');
-        return () => {
-            GetWebsiteInfo();
-
-        };
+        GetWebsiteInfo();
     }, []);
 
     function GetWebsiteInfo() {

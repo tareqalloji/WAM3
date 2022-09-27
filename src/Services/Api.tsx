@@ -142,12 +142,16 @@ export default class Api {
         });
     }
 
-    UpdateWebsiteInfo(about_us: string, phone: number, email: string) {
+    UpdateWebsiteInfo(about_us: string, phone_number: string, email: string,
+        bonus_value: string, number_of_invites: string, website_wallet: string) {
         return axios.post(`https://aurora-team.com/wam3/public/api/info`,
             {
                 about_us: about_us,
-                phone: phone,
+                phone_number: phone_number,
                 email: email,
+                bonus_value: bonus_value,
+                number_of_invites: number_of_invites,
+                website_wallet: website_wallet,
 
             }, {
             headers: {

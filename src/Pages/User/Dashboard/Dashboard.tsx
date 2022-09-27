@@ -15,9 +15,6 @@ import Button from '@mui/material/Button';
 
 export default function Dashboard() {
 
-    const Color = {
-        purple: '#7750DD',
-    }
     const classes = DashboardStyle();
     const [t, i18n] = useTranslation();
     const Lang = localStorage.getItem('lng');
@@ -28,14 +25,12 @@ export default function Dashboard() {
     const [formValues, setFormValues] = useState(values);
     useEffect(() => {
         document.title = t('Dashboard');
-        return () => {            
-            GetDashboard();
-        };
+        GetDashboard();
     }, []);
 
 
-    const GetDashboard = () => {
-        APIInstance.Dashboard()
+    const GetDashboard = async () => {
+        await APIInstance.Dashboard()
             .then((response) => {
                 values = {
                     data1: response.data.Total_amount_of_Deposit,

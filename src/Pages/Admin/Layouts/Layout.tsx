@@ -114,10 +114,10 @@ export default function PersistentDrawerLeft(props: any) {
             <div style={{ backgroundColor: Color.background }}>
                 <Box sx={{ display: 'flex', backgroundColor: Color.background, }}>
                     <CssBaseline />
-                    <AppBar position="fixed" open={open} sx={{ backgroundColor: Color.main, boxShadow: 'none' }}>
+                    <AppBar position="fixed" open={open} sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
                         <Toolbar>
                             <IconButton
-                                color="inherit"
+                                style={{ color: '#000' }}
                                 aria-label="open drawer"
                                 onClick={handleDrawerOpen}
                                 edge="start"
@@ -125,7 +125,9 @@ export default function PersistentDrawerLeft(props: any) {
                             >
                                 <MenuIcon />
                             </IconButton>
-                            <Localization />
+                            <div style={{ marginLeft: 'auto' }} >
+                                <Localization />
+                            </div>
                         </Toolbar>
                     </AppBar>
                     <Drawer
@@ -187,7 +189,7 @@ export default function PersistentDrawerLeft(props: any) {
                                     <ListItemText primary={t("AboutWebsite")} />
                                 </ListItemButton>
                             </ListItem>
-                            <ListItem style={{ color: 'inherit', textDecoration: 'inherit' }} onClick={logOut} disablePadding>
+                            <ListItem style={{ color: 'inherit', textDecoration: 'inherit' }} component={Link} to={'/Admin/'} key={t("Logout")} onClick={logOut} disablePadding >
                                 <ListItemButton>
                                     <ListItemIcon>
                                         <img src={Logout} style={{ "width": "21px" }} alt={Logout} />

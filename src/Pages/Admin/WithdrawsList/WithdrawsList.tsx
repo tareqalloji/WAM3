@@ -38,10 +38,7 @@ function WithdrawsList() {
     const [loading, setLoading] = React.useState(false);
     const classes = WithdrawsListStyle();
     const [t, i18n] = useTranslation();
-    const Lang = localStorage.getItem('lng');
-    const Color = {
-        purple: '#7750DD'
-    }
+    const Lang = localStorage.getItem('lng'); 
     const [values, setValues] = useState({
         status: 0,
     });
@@ -49,10 +46,8 @@ function WithdrawsList() {
 
     useEffect(() => {
         document.title = t('WithdrawsList');
-        return () => {
-            withdrawsList();
-            setLoading(true)
-        };
+        withdrawsList();
+        setLoading(true)
 
     }, []);
 

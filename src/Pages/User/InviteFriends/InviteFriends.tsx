@@ -1,4 +1,4 @@
- import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../Layouts/Layout';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -20,10 +20,8 @@ function InviteFriends() {
     const Lang = localStorage.getItem('lng');
     useEffect(() => {
         document.title = t('InviteFriends');
-        return () => {
-            getUserProfile();
-        };
-    },[]);
+        getUserProfile();
+    }, []);
 
     let values = {
         invite_link: '',
@@ -56,7 +54,7 @@ function InviteFriends() {
                             <CardContent>
                                 <Container>
                                     <Grid container spacing={2} className={classes.Grid}>
-                                        <Grid xs={7}>
+                                        <Grid xs={12}>
                                             <TextField
                                                 name='InviteLink'
                                                 label={t('InviteLink')}
@@ -66,9 +64,7 @@ function InviteFriends() {
                                                 disabled
                                             />
                                         </Grid>
-                                        {/* <Button>Copy</Button> */}
                                     </Grid>
-
                                 </Container>
                             </CardContent>
                         </Card>

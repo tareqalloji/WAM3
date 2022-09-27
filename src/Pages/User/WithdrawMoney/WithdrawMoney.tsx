@@ -26,11 +26,10 @@ export default function WithdrawMoney() {
     const [t, i18n] = useTranslation();
     const Lang = localStorage.getItem('lng');
     const navigate = useNavigate();
-    const Color = { purple: '#7750DD' }
     useEffect(() => {
         document.title = t('WithdrawMoney');
     });
-    
+
     const [values, setValues] = useState({
         amount: "",
         wallet_link: "",
@@ -51,7 +50,14 @@ export default function WithdrawMoney() {
         APIInstance.Withdraw(values.amount, values.wallet_link, image)
             .then((res: any) => {
                 setOpenBackDropLoading(false)
-                navigate(`/Dashboard`);
+                openWarningSnakbarHandler();
+                if (Lang === "ar") {
+                    setMessage('تمت العملية بنجاح');
+                }
+                else {
+                    setMessage('Process Done Successfully');
+                }
+                setSeverity('success')
 
             }).catch((error: any) => {
                 setOpenBackDropLoading(false);
@@ -137,7 +143,7 @@ export default function WithdrawMoney() {
                                             name="upload_file"
                                             style={{ display: 'none' }}
                                             onChange={handleInputChange}
-                                            
+
                                         />
                                         <label htmlFor="clickable"
                                             className={classes.labelbtn}
@@ -167,7 +173,7 @@ export default function WithdrawMoney() {
                                     alignItems="center">
                                     <Grid item xs={10} sm={4} >
                                         <Button
-                                            style={{ backgroundColor: Color.purple }}
+                                            className={classes.btn}
                                             fullWidth
                                             type="submit"
                                             variant="contained"

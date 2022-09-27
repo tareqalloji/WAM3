@@ -61,8 +61,10 @@
     "BonusValue": "قيمة الحسم",
     "UsersNumberForBonus": "عدد المتسخدمين المستفيدين من الحسم",
     "LoginAsAdministrator": "تسجيل الدخول كمسؤول",
-    "BackToUsersList" : "العودة الى قائمة المستخدمين",
+    "BackToUsersList": "العودة الى قائمة المستخدمين",
     "NoWithdrawsFound": "لايوجد عمليات سحب",
-    "NoneFound" : "لايوجد",
-    "NoWithdrawProcessToPreview" : "لا يوجد عمليات إيداع لعرضها"
+    "NoneFound": "لايوجد",
+    "NoWithdrawProcessToPreview": "لا يوجد عمليات إيداع لعرضها",
+    "EditAbout": "تعديل بيانات الموقع",
+    "website_wallet": "رابط محفظة الموقع"
 }

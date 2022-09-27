@@ -23,14 +23,10 @@ function Investments() {
     const classes = InvestmentsStyle();
     const [t, i18n] = useTranslation();
     const Lang = localStorage.getItem('lng');
-    const Color = {
-        purple: '#7750DD',
-    }
+
     useEffect(() => {
         document.title = t('Investments');
-        return (
-            GetDepositAmount()
-        )
+        GetDepositAmount()
     }, []);
 
     let data: any = {
@@ -149,7 +145,7 @@ function Investments() {
                                     alignItems="center">
                                     <Grid item xs={10} sm={4} >
                                         <Button
-                                            style={{ backgroundColor: Color.purple }}
+                                            className={classes.btn}
                                             fullWidth
                                             type="submit"
                                             variant="contained"

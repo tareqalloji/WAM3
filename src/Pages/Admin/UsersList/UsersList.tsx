@@ -16,7 +16,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
-import InfoIcon from '@mui/icons-material/Info';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Tooltip from '@mui/material/Tooltip';
 import CircularProgress from '@mui/material/CircularProgress';
 import { APIInstance } from '../../../Services/Api';
@@ -40,24 +40,16 @@ export default function AllUsers() {
 
     useEffect(() => {
         document.title = t('UsersList');
-        return () => {
-            GetUsersList();
-            setLoading(true)
-        };
+        GetUsersList();
+        setLoading(true)
     }, []);
-
-
 
     function GetUsersList() {
         APIInstance.GetUsersList()
-            .then((response: any) => {                
+            .then((response: any) => {
                 setUsers(response.data)
                 setLoading(false)
             })
-    }
-    const Color = {
-        purple: '#7750DD',
-        background: '#F8F8F8'
     }
 
     return (
@@ -97,12 +89,12 @@ export default function AllUsers() {
                                                     <TableCell align="center">
                                                         <Tooltip title={t('UserDetails')}>
                                                             <Button
-                                                                style={{ backgroundColor: Color.purple }}
+                                                                className={classes.btn}
                                                                 component={Link}
                                                                 to={`../Admin/UserDetails/${user.id}`}
                                                                 variant="contained"
                                                             >
-                                                                <InfoIcon />
+                                                                <MoreHorizIcon />
                                                             </Button>
                                                         </Tooltip>
                                                     </TableCell>

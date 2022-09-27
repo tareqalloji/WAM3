@@ -26,9 +26,6 @@ export default function Login() {
     const [t, i18n] = useTranslation();
     const Lang = localStorage.getItem('lng')
     const navigate = useNavigate();
-    const Color = {
-        purple: '#7750DD',
-    }
     const [values, setValues] = useState({
         email: "",
         password: "",
@@ -149,7 +146,7 @@ export default function Login() {
                                             alignItems="center">
                                             <Grid item xs={12} sm={4} >
                                                 <Button
-                                                    style={{ backgroundColor: Color.purple }}
+                                                    className={classes.btn}
                                                     fullWidth
                                                     variant="contained"
                                                     type="submit"

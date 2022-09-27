@@ -3,7 +3,7 @@ import { AnimatePresence } from 'framer-motion'
 import Login from '../Pages/User/Authentication/Login/Login';
 import Register from '../Pages/User/Authentication/Register/Register';
 import ForgetPassword from '../Pages/User/Authentication/ForgetPassword/ForgetPassword';
-import Page404 from '../Pages/User/Authentication/Page404/Page404';
+// import Page404 from '../Pages/User/Authentication/Page404/Page404';
 
 import Dashboard from '../Pages/User/Dashboard/Dashboard';
 import DepositMoney from '../Pages/User/DepositMoney/DepositMoney';
@@ -20,6 +20,7 @@ import DepositsList from '../Pages/Admin/DepositsList/DepositsList';
 import WithdrawsList from '../Pages/Admin/WithdrawsList/WithdrawsList';
 import UserDetails from '../Pages/Admin/UserDetails/UserDetails';
 import AboutWeb from '../Pages/Admin/About/About';
+import EditAboutWeb from '../Pages/Admin/EditAbout/EditAbout';
 
 
 const type = localStorage.getItem('type');
@@ -46,14 +47,15 @@ export function Routing() {
                     <Route path={'Admin/DepositsList'} element={<DepositsList />} />
                     <Route path={'Admin/WithdrawsList'} element={<WithdrawsList />} />
                     <Route path={'Admin/About'} element={<AboutWeb />} />
+                    <Route path={'Admin/EditAbout'} element={<EditAboutWeb />} />
 
                     <Route path={'/'} element={<Login />} />
                     <Route path={'/Login'} element={<Login />} />
                     <Route path={'/Register'} element={<Register />} />
                     <Route path={'/Admin'} element={<AdminLogin />} />
                     <Route path={'/ForgetPassword'} element={<ForgetPassword />} />
-                    <Route path={'/Admin'} element={<AdminLogin />} />                    
-                    <Route path={'/*'} element={<Page404 />} />
+                    <Route path={'/Admin'} element={<AdminLogin />} />
+                    {/* <Route path={'/*'} element={<Page404 />} /> */}
                 </Routes>
 
 

@@ -27,9 +27,6 @@ export default function Register() {
     const navigate = useNavigate();
     const [Countries, setCountry] = React.useState('');
     const [t, i18n] = useTranslation();
-    const Color = {
-        purple: '#7750DD',
-    }
 
     useEffect(() => {
         document.title = t('Register');
@@ -78,6 +75,10 @@ export default function Register() {
             value: 'Lebanon',
             label: 'لبنان',
         },
+        {
+            value: 'Bahren',
+            label: 'لبنان',
+        },
     ];
 
 
@@ -120,16 +121,36 @@ export default function Register() {
             }).catch((error) => {
                 setOpenBackDropLoading(false);
                 openWarningSnakbarHandler();
-                if (Lang === "ar") {
-                    setMessage('يوجد خطأ في إدخال البيانات');
+                console.log(error.response.data.message);
+                if (error.response.data.message == "The email has already been taken.") {
+                    if (Lang === "ar") {
+                        setMessage('البريد الالكتروني موجود مسبقاً');
+                    }
+                    else {
+                        setMessage('The email has already been taken');
+                    }
+                }
+                else if (error.response.data.message == "The phone has already been taken.") {
+                    if (Lang === "ar") {
+                        setMessage('رقم الهاتف موجود مسبقاً');
+                    }
+                    else {
+                        setMessage('The phone has already been taken');
+                    }
                 }
                 else {
-                    setMessage('Incorrect Data');
+
+                    if (Lang === "ar") {
+                        setMessage('يوجد خطأ في إدخال البيانات');
+                    }
+                    else {
+                        setMessage('Incorrect Data');
+                    }
                 }
                 setSeverity('error')
                 console.error(error);
             });
-    };    
+    };
 
 
     return (
@@ -233,7 +254,7 @@ export default function Register() {
                                         <Grid item xs={12} sm={4}>
                                             <TextField
                                                 variant="outlined"
-                                                type= "email"
+                                                type="email"
                                                 required
                                                 fullWidth
                                                 id="Email"
@@ -280,7 +301,7 @@ export default function Register() {
                                         alignItems="center">
                                         <Grid item xs={12} sm={4} >
                                             <Button
-                                                style={{ backgroundColor: Color.purple }}
+                                                className={classes.btn}
                                                 fullWidth
                                                 type="submit"
                                                 variant="contained"

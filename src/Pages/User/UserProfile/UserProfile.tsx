@@ -29,14 +29,9 @@ function UserProfile() {
         invite_link: '',
     };
     const [formValues, setFormValues] = useState(values);
-    const Color = {
-        purple: '#7750DD',
-    }
     useEffect(() => {
         document.title = t('UserProfile');
-        return () => {
-            getUserProfile();
-        };
+        getUserProfile();
     }, []);
     const getUserProfile = () => {
         setOpenBackDropLoading(true)
@@ -52,7 +47,7 @@ function UserProfile() {
                 }
                 setOpenBackDropLoading(false)
             }).then(() => {
-                setFormValues(values)                
+                setFormValues(values)
             });
     }
     return (
@@ -153,7 +148,9 @@ function UserProfile() {
                                     <Button
                                         className={(Lang === "ar" ? classes.drtl : classes.dltr)}
                                         sx={{ marginBottom: 5 }}
-                                        style={{ backgroundColor: Color.purple }}
+                                        style={{
+                                            background: 'linear-gradient(0deg, rgba(93,89,125,1) 27%, rgba(186,177,249,1) 100%)'
+                                        }}
                                         fullWidth
                                         type="submit"
                                         variant="contained"
@@ -162,7 +159,7 @@ function UserProfile() {
                                     >
                                         {t('EditProfile')}
                                         &nbsp;
-                                        <EditIcon />
+                                        < EditIcon />
                                     </Button>
                                 </Grid>
                             </Grid>

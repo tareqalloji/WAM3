@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { DepositsListStyle } from './DepositsListStyle';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';  
+import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import Table from '@mui/material/Table';
@@ -41,10 +41,8 @@ function DepositsList() {
     const Lang = localStorage.getItem('lng');
     useEffect(() => {
         document.title = t('DepositsList');
-        return () => {
-            GetDepositsList();
-            setLoading(true)
-        };
+        GetDepositsList();
+        setLoading(true)
 
     }, []);
 
@@ -60,15 +58,15 @@ function DepositsList() {
             })
     }
 
-    function AcceptDeposit(id:any) {
-        APIInstance.DepositStatus('1',id).then((res: any) => {
+    function AcceptDeposit(id: any) {
+        APIInstance.DepositStatus('1', id).then((res: any) => {
             GetDepositsList()
         })
-        
+
     }
 
-    function RejectDeposit(id:any) {
-        APIInstance.DepositStatus('2',id).then((res: any) => {
+    function RejectDeposit(id: any) {
+        APIInstance.DepositStatus('2', id).then((res: any) => {
             GetDepositsList()
         });
     }
@@ -113,7 +111,7 @@ function DepositsList() {
                                                                     <Button
                                                                         className={classes.Accept}
                                                                         style={{ marginLeft: '5px', marginRight: '5px' }}
-                                                                        onClick={()=>{
+                                                                        onClick={() => {
                                                                             AcceptDeposit(deposit.id);
                                                                         }}
                                                                         variant="contained"
@@ -122,7 +120,7 @@ function DepositsList() {
                                                                     </Button>
                                                                     <Button
                                                                         className={classes.Reject}
-                                                                        onClick={()=>{
+                                                                        onClick={() => {
                                                                             RejectDeposit(deposit.id)
                                                                         }}
                                                                         variant="contained"

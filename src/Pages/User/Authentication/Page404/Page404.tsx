@@ -4,11 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 import Image404 from '../../../../assets/Images/Page404.svg';
 import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined';
-const Color = {
-    purple: '#7750DD',
-}
+import { Page404Style } from './Page404Style';
 
 export default function Page404() {
+    const classes = Page404Style();
     const type = localStorage.getItem('type');
     const [t, i18n] = useTranslation();
 
@@ -26,10 +25,10 @@ export default function Page404() {
                         }}
                     >
                         <Link to="/" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" sx={{
-                                marginTop: '10px', backgroundColor: Color.purple,
-                                ':hover': { bgcolor: Color.purple },
-                            }} size="large">
+                            <Button variant="contained"
+                                sx={{ marginTop: '10px' }}
+                                className={classes.btn}
+                                size="large">
                                 <KeyboardBackspaceOutlinedIcon></KeyboardBackspaceOutlinedIcon>
                                 {t("Login")}
                             </Button>
@@ -50,10 +49,11 @@ export default function Page404() {
                         }}
                     >
                         <Link to="/Dashboard" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" sx={{
-                                marginTop: '10px', backgroundColor: Color.purple,
-                                ':hover': { bgcolor: Color.purple },
-                            }} size="large">
+                            <Button
+                                variant="contained"
+                                className={classes.btn}
+                                sx={{ marginTop: '10px' }}
+                                size="large">
                                 <KeyboardBackspaceOutlinedIcon></KeyboardBackspaceOutlinedIcon>
                                 {t("BackToDashboard")}
                             </Button>
@@ -74,10 +74,11 @@ export default function Page404() {
                             }}
                         >
                             <Link to="/login" style={{ textDecoration: 'none' }}>
-                                <Button variant="contained" sx={{
-                                    marginTop: '10px', backgroundColor: Color.purple,
-                                    ':hover': { bgcolor: Color.purple },
-                                }} size="large">
+                                <Button
+                                    variant="contained"
+                                    className={classes.btn}
+                                    sx={{ marginTop: '10px' }} 
+                                    size="large">
                                     <KeyboardBackspaceOutlinedIcon></KeyboardBackspaceOutlinedIcon>
                                     {t("BackToUsersList")}
                                 </Button>

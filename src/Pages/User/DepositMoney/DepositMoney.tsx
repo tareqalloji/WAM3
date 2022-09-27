@@ -20,10 +20,8 @@ import { APIInstance } from '../../../Services/Api';
 function DepositMoney() {
     useEffect(() => {
         document.title = t('DepositMoney');
-        return () => {
-            GetWebsiteInfo();
-            Dashboard();
-        }
+        GetWebsiteInfo();
+        Dashboard();
     }, []);
     const [message, setMessage] = useState<string>('')
     const [severity, setSeverity] = useState<string>('')
@@ -32,7 +30,6 @@ function DepositMoney() {
     const classes = DepositMoneyStyle();
     const [t, i18n] = useTranslation();
     const Lang = localStorage.getItem('lng');
-    const Color = { purple: '#7750DD' }
     const navigate = useNavigate();
     const [values, setValues] = useState({
         amount: "",
@@ -91,7 +88,14 @@ function DepositMoney() {
         APIInstance.Deposit(values.amount, image)
             .then((res: any) => {
                 setOpenBackDropLoading(false)
-                navigate(`/Dashboard`);
+                openWarningSnakbarHandler();
+                if (Lang === "ar") {
+                    setMessage('تمت العملية بنجاح');
+                }
+                else {
+                    setMessage('Process Done Successfully');
+                }
+                setSeverity('success')
 
             }).catch((error: any) => {
                 setOpenBackDropLoading(false);
@@ -103,7 +107,6 @@ function DepositMoney() {
                     setMessage('Invalid Data');
                 }
                 setSeverity('error')
-                console.error(error);
             });
     };
 
@@ -238,7 +241,7 @@ function DepositMoney() {
                                     alignItems="center">
                                     <Grid item xs={10} sm={4} >
                                         <Button
-                                            style={{ backgroundColor: Color.purple }}
+                                            className={classes.btn}
                                             fullWidth
                                             type="submit"
                                             variant="contained"

@@ -18,9 +18,6 @@ export default function UserDetails() {
     const [t, i18n] = useTranslation();
     const Lang = localStorage.getItem('lng');
     const { id } = useParams();
-    const Color = {
-        purple: '#7750DD',
-    }
     const values = {
         user_details: [{
             first_name: '',
@@ -39,9 +36,7 @@ export default function UserDetails() {
 
     useEffect(() => {
         document.title = t('UserDetails');
-        return () => {
-            GetUserdetails(id);
-        };
+        GetUserdetails(id);
 
 
     }, []);
@@ -72,7 +67,7 @@ export default function UserDetails() {
                             <Card>
                                 <Grid sx={{ margin: 4 }}>
                                     <CssBaseline />
-                                    <Typography component="h1" variant="h5" style={{ color: Color.purple }} className={(Lang === "ar" ? classes.drtl : classes.dltr)}>
+                                    <Typography component="h1" variant="h5" className={(Lang === "ar" ? classes.drtl : classes.dltr)}>
                                         {t('InvitedUsers')}
                                     </Typography>
                                     <form>
@@ -157,9 +152,9 @@ export default function UserDetails() {
                                             <Grid item xs={6} sm={6}>
                                                 <Typography variant="subtitle1">
                                                     {formValues.user_details[0].invite_link == null ?
-                                                    t('NoneFound')
-                                                    :
-                                                    formValues.user_details[0].invite_link
+                                                        t('NoneFound')
+                                                        :
+                                                        formValues.user_details[0].invite_link
                                                     }
                                                 </Typography>
                                             </Grid>

@@ -108,7 +108,7 @@ export default function PersistentDrawerLeft(props: any) {
     }
 
 
-    if ((localStorage.getItem('token') == null || localStorage.getItem('token') === undefined)) {        
+    if ((localStorage.getItem('token') == null || localStorage.getItem('token') === undefined)) {
         return (<Navigate to="/" />);
 
     }
@@ -118,21 +118,21 @@ export default function PersistentDrawerLeft(props: any) {
         return (
             <Box sx={{ display: 'flex', backgroundColor: Color.background, height: '100vh' }}>
                 <CssBaseline />
-                <AppBar position="fixed" open={open} sx={{ backgroundColor: Color.main, boxShadow: 'none' }}>
+                <AppBar position="fixed" open={open} sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
                     <Toolbar>
                         <IconButton
-                            color="inherit"
+                            style={{ color: '#000' }}
                             aria-label="open drawer"
                             onClick={handleDrawerOpen}
                             edge="start"
                             sx={{ mr: 2, ...(open && { display: 'none' }) }}
                         >
                             <MenuIcon />
-                        </IconButton>
-                        <Button variant="contained" className={classes.btn} component={Link} to="/Dashboard">
+                        </IconButton>                        
+                        <Button variant="contained" style={{ color: '#000', marginLeft:'auto' }} className={classes.btn} component={Link} to="/Dashboard">
                             {t('Dashboard')}
                         </Button>
-                        <Button variant="contained" className={classes.btn} component={Link} to="/About">
+                        <Button variant="contained" style={{ color: '#000' }} className={classes.btn} component={Link} to="/About">
                             {t('About')}
                         </Button>
                         <Localization />

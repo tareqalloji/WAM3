@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../Layouts/Layout';
 import { useTranslation } from 'react-i18next';
-import { EditProfileStyle } from './EditProfileStyle';
+import { EditAboutStyle } from './EditAboutStyle';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -10,106 +10,58 @@ import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { WarningSnackbar } from '../../../component/Snackbar/snackbar';
 import { APIInstance } from '../../../Services/Api';
+import InputAdornment from '@mui/material/InputAdornment';
 
-
-export default function EditProfile() {
+export default function About() {
     const [message, setMessage] = useState<string>('')
     const [severity, setSeverity] = useState<string>('')
     const [openWarningSnakbar, setOpenWarningSnakbar] = React.useState<boolean>(false);
     const [openBackDropLoading, setOpenBackDropLoading] = React.useState<boolean>(false);
-    const classes = EditProfileStyle();
+    const classes = EditAboutStyle();
     const [t, i18n] = useTranslation();
     const Lang = localStorage.getItem('lng');
     useEffect(() => {
-        document.title = t('EditProfile');
-        getUserProfile();
+        document.title = t('AboutWebsite');
+        GetWebsiteInfo();
     }, []);
-    const [Countries, setCurrency] = useState('');
-    const CountriesEn = [
-        {
-            value: 'Iraq',
-            label: 'Iraq',
-        },
-        {
-            value: 'Syria',
-            label: 'Syria',
-        },
-        {
-            value: 'Saudia Arabia',
-            label: 'SaudiaArabia',
-        },
-        {
-            value: 'Egypt',
-            label: 'Egypt',
-        },
-        {
-            value: 'Lebanon',
-            label: 'Lebanon',
-        },
-    ];
-    const CountriesAr = [
-        {
-            value: 'Iraq',
-            label: 'العراق',
-        },
-        {
-            value: 'Syria',
-            label: 'سوريا',
-        },
-        {
-            value: 'Saudia Arabia',
-            label: 'السعودية',
-        },
-        {
-            value: 'Egypt',
-            label: 'مصر',
-        },
-        {
-            value: 'Lebanon',
-            label: 'لبنان',
-        },
-    ];
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setCurrency(event.target.value);
-        setValues({ ...values, country: event.target.value })
-    };
 
     let data = {
-        first_name: '',
-        last_name: '',
-        phone: '',
-        country: '',
-        invite_link: '',
+        about_us: '',
+        phone_number: '',
+        email: '',
+        bonus_value: '',
+        number_of_invites: '',
+        website_wallet: '',
     };
     const [formData, setFormData] = useState(data);
 
 
     const [values, setValues] = useState({
-        first_name: "",
-        last_name: "",
-        phone: "",
-        country: "",
-        invite_link: "",
+        about_us: "",
+        phone_number: "",
+        email: "",
+        bonus_value: "",
+        number_of_invites: "",
+        website_wallet: "",
 
     });
 
-    const getUserProfile = () => {
-        setOpenBackDropLoading(true)
-        APIInstance.getUserProfile()
+    const GetWebsiteInfo = () => {
+        // setOpenBackDropLoading(true)
+        APIInstance.GetWebsiteInfo()
             .then((response) => {
                 data = {
-                    first_name: response.data.data.first_name,
-                    last_name: response.data.data.last_name,
-                    phone: response.data.data.phone,
-                    country: response.data.data.country,
-                    invite_link: response.data.data.invite_link,
+                    about_us: response.data[0].about_us,
+                    phone_number: response.data[0].phone_number,
+                    email: response.data[0].email,
+                    bonus_value: response.data[0].bonus_value,
+                    number_of_invites: response.data[0].number_of_invites,
+                    website_wallet: response.data[0].website_wallet,
                 }
                 setOpenBackDropLoading(false)
             }).then(() => {
@@ -119,8 +71,8 @@ export default function EditProfile() {
     const handleSubmit = (e: any) => {
         e.preventDefault();
         setOpenBackDropLoading(true)
-        APIInstance.UpdateProfile(values.first_name, values.last_name, values.phone,
-            values.country, values.invite_link)
+        APIInstance.UpdateWebsiteInfo(values.about_us, values.phone_number, values.email,
+            values.bonus_value, values.number_of_invites, values.website_wallet)
             .then((res: any) => {
                 console.log(res)
                 setOpenBackDropLoading(false)
@@ -133,17 +85,6 @@ export default function EditProfile() {
                 }
                 setSeverity('success')
 
-            }).catch((error) => {
-                setOpenBackDropLoading(false);
-                openWarningSnakbarHandler();
-                if (Lang === "ar") {
-                    setMessage('يوجد خطأ في إدخال البيانات');
-                }
-                else {
-                    setMessage('Incorrect Data');
-                }
-                setSeverity('error')
-                console.error(error);
             });
     };
     function openWarningSnakbarHandler() {
@@ -181,38 +122,75 @@ export default function EditProfile() {
                                 <Grid sx={{ margin: 4 }}>
                                     <CssBaseline />
                                     <Typography component="h1" variant="h5" className={(Lang === "ar" ? classes.drtl : classes.dltr)}>
-                                        {t('EditProfile')}
+                                        {t('AboutWebsite')}
                                     </Typography>
                                     <Grid container spacing={1} sx={{ marginTop: 5 }} className={(Lang === "ar" ? classes.TypeRtl : classes.TypeLtr)}>
                                         <Grid item xs={6} sm={6}>
                                             <Typography component="h5" variant="h5">
-                                                {t('FirstName')}:
+                                                {t('UsersNumberForBonus')}:
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={6} sm={6}>
                                             <TextField
-                                                type='text'
-                                                name="first_name"
+                                                type='number'
+                                                name="number_of_invites"
                                                 variant="outlined"
-                                                value={values.first_name !== '' ? values.first_name : formData.first_name}
-                                                onChange={(e) => setValues({ ...values, first_name: e.target.value })}
                                                 fullWidth
                                                 autoFocus
+                                                value={values.number_of_invites !== '' ? values.number_of_invites : formData.number_of_invites}
+                                                onChange={(e) => setValues({ ...values, number_of_invites: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={6} sm={6}>
                                             <Typography component="h5" variant="h5">
-                                                {t('LastName')}:
+                                                {t('BonusValue')}:
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={6} sm={6}>
+                                            <TextField
+                                                type='number'
+                                                name="bonus_value"
+                                                variant="outlined"
+                                                InputProps={{
+                                                    inputProps: { min: 0, max: 100 },
+                                                    startAdornment: <InputAdornment position="start"><strong>%</strong></InputAdornment>
+                                                }}
+                                                fullWidth
+                                                autoFocus
+                                                value={values.bonus_value !== '' ? values.bonus_value : formData.bonus_value}
+                                                onChange={(e) => setValues({ ...values, bonus_value: e.target.value })}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={6} sm={6}>
+                                            <Typography component="h5" variant="h5">
+                                                {t('website_wallet')}:
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={6} sm={6}>
                                             <TextField
                                                 type='text'
-                                                name="last_name"
+                                                name="website_wallet"
                                                 variant="outlined"
-                                                value={values.last_name !== '' ? values.last_name : formData.last_name}
-                                                onChange={(e) => setValues({ ...values, last_name: e.target.value })}
                                                 fullWidth
+                                                autoFocus
+                                                value={values.website_wallet !== '' ? values.website_wallet : formData.website_wallet}
+                                                onChange={(e) => setValues({ ...values, website_wallet: e.target.value })}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={6} sm={6}>
+                                            <Typography component="h5" variant="h5">
+                                                {t('Email')}:
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={6} sm={6}>
+                                            <TextField
+                                                type='email'
+                                                name="email"
+                                                variant="outlined"
+                                                fullWidth
+                                                autoFocus
+                                                value={values.email !== '' ? values.email : formData.email}
+                                                onChange={(e) => setValues({ ...values, email: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={6} sm={6}>
@@ -222,45 +200,29 @@ export default function EditProfile() {
                                         </Grid>
                                         <Grid item xs={6} sm={6}>
                                             <TextField
-                                                type="number"
-                                                name="phone"
+                                                type='number'
+                                                name="PhoneNumber"
                                                 variant="outlined"
-                                                id="phone"
-                                                value={values.phone !== '' ? values.phone : formData.phone}
-                                                onChange={(e) => setValues({ ...values, phone: e.target.value })}
+                                                defaultValue={t('PhoneNumber')}
                                                 fullWidth
-                                                autoFocus
+                                                value={values.phone_number !== '' ? values.phone_number : formData.phone_number}
+                                                onChange={(e) => setValues({ ...values, phone_number: e.target.value })}
                                             />
                                         </Grid>
                                         <Grid item xs={6} sm={6}>
                                             <Typography component="h5" variant="h5">
-                                                {t('Country')}:
+                                                {t('About')}:
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={6} sm={6}>
                                             <TextField
-                                                name="Country"
-                                                variant="outlined"
-                                                id="Country"
                                                 fullWidth
-                                                autoFocus
-                                                select
-                                                value={values.country !== '' ? values.country : formData.country}
-                                                onChange={handleChange}
-                                            >
-                                                {(Lang === "ar" ?
-                                                    CountriesAr.map((option) => (
-                                                        <MenuItem key={option.value} value={option.value}>
-                                                            {option.label}
-                                                        </MenuItem>
-                                                    ))
-                                                    :
-                                                    CountriesEn.map((option) => (
-                                                        <MenuItem key={option.value} value={option.value}>
-                                                            {option.label}
-                                                        </MenuItem>
-                                                    ))
-                                                )}</TextField>
+                                                id="outlined-multiline-flexible"
+                                                multiline
+                                                maxRows={20}
+                                                value={values.about_us !== '' ? values.about_us : formData.about_us}
+                                                onChange={(e) => setValues({ ...values, about_us: e.target.value })}
+                                            />
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -272,9 +234,9 @@ export default function EditProfile() {
                                     alignItems="center">
                                     <Grid item xs={12} sm={4} >
                                         <Button
-                                            style={{ background: 'linear-gradient(0deg, rgba(93,89,125,1) 27%, rgba(186,177,249,1) 100%)' }}
                                             className={(Lang === "ar" ? classes.drtl : classes.dltr)}
                                             sx={{ marginBottom: 1.5 }}
+                                            style={{ background: "linear-gradient(0deg, rgba(93,89,125,1) 27%, rgba(186,177,249,1) 100%)" }}
                                             fullWidth
                                             type="submit"
                                             variant="contained"
@@ -289,7 +251,7 @@ export default function EditProfile() {
                         </Card>
                     </Box>
                 </Container>
-            </Layout >
+            </Layout>
         </>
     );
 }

@@ -15,4 +15,8 @@ export const UsersListStyle = makeStyles({
   CircularProgress: {
     color: "#7750DD !important",
   },
+  btn: {
+    background:
+      "linear-gradient(0deg, rgba(93,89,125,1) 27%, rgba(186,177,249,1) 100%)",
+  },
 });

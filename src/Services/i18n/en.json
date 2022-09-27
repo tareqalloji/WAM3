@@ -64,5 +64,7 @@
     "BackToUsersList": "Back To Users List",
     "NoWithdrawsFound": "No Withdraws Found",
     "NoneFound": "None Found",
-    "NoWithdrawProcessToPreview": "No Withdraw Process To Preview"
+    "NoWithdrawProcessToPreview": "No Withdraw Process To Preview",
+    "EditAbout": "Edit Website Informations",
+    "website_wallet": "Website Wllet"
 }
