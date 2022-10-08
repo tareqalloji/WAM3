@@ -1,6 +1,6 @@
 {
   "name": "stoking",
-  "homepage": "https://aurora-team.com/",
+  "homepage": "https://wam3.tech",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -22,6 +22,7 @@
     "@types/validator": "^13.7.6",
     "axios": "^0.27.2",
     "copy-to-clipboard": "^3.3.2",
+    "dateformat": "^5.0.3",
     "filepond": "^4.30.4",
     "filepond-plugin-image-exif-orientation": "^1.0.11",
     "filepond-plugin-image-preview": "^4.6.11",
@@ -30,6 +31,7 @@
     "i18next": "^21.9.1",
     "i18next-browser-languagedetector": "^6.1.5",
     "i18next-http-backend": "^1.4.1",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",

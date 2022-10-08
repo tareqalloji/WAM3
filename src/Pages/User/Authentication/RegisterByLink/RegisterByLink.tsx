@@ -6,19 +6,18 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useTranslation } from "react-i18next";
-import { RegisterStyle } from "./RegisterStyle";
+import { RegisterByLinkStyle } from "./RegisterByLinkStyle";
 import CssBaseline from "@mui/material/CssBaseline";
 import Card from "@mui/material/Card";
 import MenuItem from "@mui/material/MenuItem";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import { WarningSnackbar } from "../../../../component/Snackbar/snackbar";
-import { APIInstance } from "../../../../Services/Api";
-import { CountriesAr } from "../../../../Services/CountriesAr";
 import { CountriesEn } from "../../../../Services/CountriesEn";
-import { link } from "fs";
+import { CountriesAr } from "../../../../Services/CountriesAr";
 
+import axios from "axios";
 export default function Register() {
   const [message, setMessage] = useState<string>("");
   const [severity, setSeverity] = useState<string>("");
@@ -26,12 +25,12 @@ export default function Register() {
     React.useState<boolean>(false);
   const [openBackDropLoading, setOpenBackDropLoading] =
     React.useState<boolean>(false);
-  const classes = RegisterStyle();
+  const classes = RegisterByLinkStyle();
   const Lang = localStorage.getItem("lng");
   const navigate = useNavigate();
   const [Countries, setCountry] = React.useState("");
   const [t, i18n] = useTranslation();
-  var auth = "true";
+  const { id } = useParams();
   useEffect(() => {
     document.title = t("Register");
   });
@@ -58,19 +57,21 @@ export default function Register() {
   function closeWarningSnakbar() {
     setOpenWarningSnakbar(false);
   }
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
     setOpenBackDropLoading(true);
-    APIInstance.Register(
-      values.first_name,
-      values.last_name,
-      values.phone,
-      values.email,
-      values.country,
-      values.password,
-      values.password_confirmation
-    )
-      .then((res: any) => {
+    return axios
+      .post(`https://wam3.tech/wam3/public/api/invite-register/${id}`, {
+        first_name: values.first_name,
+        last_name: values.last_name,
+        phone: values.phone,
+        email: values.email,
+        country: values.country,
+        password: values.password,
+        password_confirmation: values.password_confirmation,
+      })
+      .then((res) => {
         if (res.data.token !== null && res.data.token !== undefined) {
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("type", "user");
@@ -80,9 +81,6 @@ export default function Register() {
         }
       })
       .catch((error) => {
-        setOpenBackDropLoading(false);
-        openWarningSnakbarHandler();
-        console.log(error.response.data.message);
         if (
           error.response.data.message == "The email has already been taken."
         ) {
@@ -198,8 +196,12 @@ export default function Register() {
                         required
                         label={t("Country")}
                         value={Countries}
+                        // onSelect={handleChange}
                         onChange={handleChange}
                       >
+                        <MenuItem value="" disabled selected>
+                          <em>select the value</em>
+                        </MenuItem>
                         {Lang === "ar"
                           ? CountriesAr.map((option) => (
                               <MenuItem key={option.value} value={option.value}>

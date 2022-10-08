@@ -34,20 +34,20 @@ export default function WithdrawMoney() {
         amount: "",
         wallet_link: "",
     });
-    const [image, setImage] = useState('');
-    const [file, setfile] = useState('');
+    // const [image, setImage] = useState('');
+    // const [file, setfile] = useState('');
 
-    const handleInputChange = (e: any) => {
-        setImage(e.target.files[0])
-        setfile(URL.createObjectURL(e.target.files[0]));
-    };
+    // const handleInputChange = (e: any) => {
+    //     setImage(e.target.files[0])
+    //     setfile(URL.createObjectURL(e.target.files[0]));
+    // };
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
         setOpenBackDropLoading(true)
-        const fd = new FormData();
-        fd.append('image', image);
-        APIInstance.Withdraw(values.amount, values.wallet_link, image)
+        // const fd = new FormData();
+        // fd.append('image', image);
+        APIInstance.Withdraw(values.amount, values.wallet_link)
             .then((res: any) => {
                 setOpenBackDropLoading(false)
                 openWarningSnakbarHandler();
@@ -130,7 +130,7 @@ export default function WithdrawMoney() {
                                         />
                                     </Grid>
                                 </Grid>
-                                <Grid
+                                {/* <Grid
                                     container
                                     sx={{ marginTop: 5, marginBottom: 5 }}
                                     display="flex"
@@ -152,8 +152,8 @@ export default function WithdrawMoney() {
                                             <CameraAltIcon />
                                         </label>
                                     </Grid>
-                                </Grid>
-                                <Grid container
+                                </Grid> */}
+                                {/* <Grid container
                                     display="flex"
                                     justifyContent="center"
                                     alignItems="center">
@@ -164,7 +164,7 @@ export default function WithdrawMoney() {
                                             style={{ margin: 'auto' }} alt={file}
                                         />
                                     }
-                                </Grid>
+                                </Grid> */}
                                 <Grid
                                     container
                                     sx={{ marginTop: 5, marginBottom: 5 }}

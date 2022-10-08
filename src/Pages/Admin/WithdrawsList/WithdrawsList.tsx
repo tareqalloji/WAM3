@@ -92,7 +92,7 @@ function WithdrawsList() {
                                                 <TableCell align="center">{t('UserName')}</TableCell>
                                                 <TableCell align="center">{t('Amount')}</TableCell>
                                                 <TableCell align="center">{t('WalletLink')}</TableCell>
-                                                <TableCell align="center">{t('ProcessImage')}</TableCell>
+                                                {/* <TableCell align="center">{t('ProcessImage')}</TableCell> */}
                                                 <TableCell align="center">{t('Options')}</TableCell>
                                             </TableRow>
                                         </TableHead>
@@ -108,9 +108,9 @@ function WithdrawsList() {
                                                                 <TableCell align="center">{user.first_name} {user.last_name}</TableCell>
                                                                 <TableCell align="center">{withdraw.amount}</TableCell>
                                                                 <TableCell align="center">{withdraw.wallet_link}</TableCell>
-                                                                <TableCell align="center">
+                                                                {/* <TableCell align="center">
                                                                     <img src={`https://aurora-team.com/wam3/public/storage/${withdraw.image}`} alt="" style={{ width: '300px', height: '200px' }} />
-                                                                </TableCell>
+                                                                </TableCell> */}
                                                                 <TableCell align="center">
                                                                     <Button
                                                                         className={classes.Accept}

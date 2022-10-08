@@ -29,6 +29,7 @@ import Localization from './Localization/Localization';
 import Button from '@mui/material/Button';
 import { LayoutStyle } from './LayoutStyle';
 import { Navigate, Link, useNavigate } from 'react-router-dom';
+import VerfiyEmail from './../Authentication/VerifyEmail/VerifyEmail';
 
 const Color = {
     main: '#7750DD',
@@ -114,6 +115,8 @@ export default function PersistentDrawerLeft(props: any) {
     }
     else if (localStorage.getItem('type') === 'admin')
         return (<Navigate to="/Admin/UsersList" />);
+        else if (localStorage.getItem('type') === 'user' && localStorage.getItem('Auth') === 'false')
+        return (<Navigate to="/VerifyEmail" />);
     else
         return (
             <Box sx={{ display: 'flex', backgroundColor: Color.background, height: '100vh' }}>
